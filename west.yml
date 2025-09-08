@@ -1,0 +1,30 @@
+manifest:
+  version: 0.7
+
+  defaults:
+    remote: zephyrproject
+
+  remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos
+    - name: bytefull
+      url-base: https://github.com/bytefull
+
+  projects:
+    - name: zephyr
+      repo-path: zephyr
+      revision: v4.1.0
+      path: zephyr
+      import:
+        path-prefix: deps
+        name-allowlist:
+          - cmsis
+          - hal_stm32
+    - name: pn532
+      remote: bytefull
+      repo-path: pn532-zephyr-driver
+      revision: main
+      path: deps/modules/pn532
+
+  self:
+    path: app
