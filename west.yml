@@ -1,0 +1,32 @@
+manifest:
+  version: 0.7
+
+  defaults:
+    remote: zephyrproject
+
+  remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: golioth
+      path: deps/modules/lib/golioth-firmware-sdk
+      revision: main
+      url: https://github.com/kaizoku-oh/golioth-firmware-sdk.git
+      submodules: true
+
+    - name: zephyr
+      repo-path: zephyr
+      revision: v4.0.0
+      path: zephyr
+      import:
+        path-prefix: deps
+        name-allowlist:
+          - cmsis
+          - hal_stm32
+          - mcuboot
+          - mbedtls
+          - zcbor
+
+  self:
+    path: app
