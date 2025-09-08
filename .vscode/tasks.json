@@ -1,0 +1,76 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Clean (application)",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "${workspaceFolder}/app/build",
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build (application)",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "west",
+            "args": [
+                "build",
+                "${workspaceFolder}/app",
+                "-d",
+                "${workspaceFolder}/app/build",
+                "-p",
+                "auto",
+                "-b",
+                "${input:board}",
+                "--pristine"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+        },
+        {
+            "label": "Flash (application)",
+            "type": "shell",
+            "command": "west",
+            "args": [
+                "flash",
+                "-d",
+                "${workspaceFolder}/app/build",
+                "--runner",
+                "openocd"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Update west project",
+            "type": "shell",
+            "command": "west",
+            "args": [
+                "update"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "board",
+            "type": "pickString",
+            "default": "nucleo_f767zi",
+            "description": "See https://docs.zephyrproject.org/latest/boards/st",
+            "options": [
+                "nucleo_f767zi"
+            ]
+        }
+    ]
+}
