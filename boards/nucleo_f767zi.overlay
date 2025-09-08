@@ -1,0 +1,7 @@
+&die_temp {
+	status = "okay";
+};
+
+&usart3 {
+	current-speed = <2000000>;
+};
